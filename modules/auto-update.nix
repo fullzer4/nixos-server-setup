@@ -5,8 +5,6 @@
     enable = true;
     flake = "github:fullzer4/nixos-server-setup#${config.networking.hostName}";
     flags = [
-      "--update-input"
-      "nixpkgs"
       "--no-write-lock-file"
     ];
     dates = "minutely";
