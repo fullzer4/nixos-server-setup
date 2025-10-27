@@ -7,6 +7,8 @@
     enable = true;
     hostname = "fullzer4labs";
     environment = "dev";
+    logLevel = "INFO";
+    enableLiveProcessCollection = true;
   };
 
   networking.firewall.enable = false;
