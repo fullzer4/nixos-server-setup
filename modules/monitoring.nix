@@ -87,10 +87,6 @@
         network_config = {
           enabled = true;
         };
-        system_probe_config = {
-          enabled = true;
-          sysprobe_socket = "/opt/datadog-agent/run/sysprobe.sock";
-        };
       };
       
       enableLiveProcessCollection = config.monitoring.datadog.enableLiveProcessCollection;
@@ -100,21 +96,10 @@
       "f ${config.monitoring.datadog.apiKeyFile} 0400 datadog datadog - -"
     ];
 
-    # Enable kernel modules for network monitoring
     boot.kernelModules = lib.mkIf config.monitoring.datadog.enableNetworkMonitoring [
       "nf_conntrack"
       "nf_conntrack_ipv4"
       "nf_nat"
     ];
-
-    # Allow datadog-agent to use CAP_NET_ADMIN for network monitoring
-    security.wrappers = lib.mkIf config.monitoring.datadog.enableNetworkMonitoring {
-      datadog-system-probe = {
-        source = "${pkgs.datadog-agent}/bin/system-probe";
-        capabilities = "cap_sys_admin,cap_sys_resource,cap_sys_ptrace,cap_net_admin,cap_net_broadcast,cap_net_raw,cap_dac_read_search,cap_dac_override+eip";
-        owner = "root";
-        group = "root";
-      };
-    };
   };
 }
