@@ -9,6 +9,7 @@
     environment = "dev";
     logLevel = "INFO";
     enableLiveProcessCollection = true;
+    enableProcessAgent = true;
   };
 
   networking.firewall.enable = false;

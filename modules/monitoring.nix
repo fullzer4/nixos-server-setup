@@ -46,6 +46,12 @@
         default = true;
         description = "Enable live process collection";
       };
+
+      enableProcessAgent = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable process agent to collect running processes";
+      };
     };
   };
 
@@ -66,6 +72,11 @@
       
       extraConfig = {
         logs_enabled = true;
+      } // lib.optionalAttrs config.monitoring.datadog.enableProcessAgent {
+        process_config = {
+          enabled = "true";
+          process_collection.enabled = "true";
+        };
       };
       
       enableLiveProcessCollection = config.monitoring.datadog.enableLiveProcessCollection;
