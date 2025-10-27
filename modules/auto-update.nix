@@ -9,7 +9,7 @@
       "nixpkgs"
       "--no-write-lock-file"
     ];
-    dates = "daily";
+    dates = "minutely";
     allowReboot = false;
   };
 
