@@ -52,6 +52,12 @@
         default = false;
         description = "Enable process agent to collect running processes";
       };
+
+      enableNetworkMonitoring = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable Cloud Network Monitoring (CNM) for network traffic visibility";
+      };
     };
   };
 
@@ -72,28 +78,18 @@
       
       extraConfig = {
         logs_enabled = true;
-        network_config = {
-          enabled = true;
-        };
       } // lib.optionalAttrs config.monitoring.datadog.enableProcessAgent {
         process_config = {
           enabled = "true";
           process_collection.enabled = "true";
         };
+      } // lib.optionalAttrs config.monitoring.datadog.enableNetworkMonitoring {
+        network_config = {
+          enabled = true;
+        };
       };
       
       enableLiveProcessCollection = config.monitoring.datadog.enableLiveProcessCollection;
-      
-      # Enable network check with detailed metrics
-      checks.network = {
-        init_config = {};
-        instances = [{
-          collect_connection_state = true;
-          collect_rate_metrics = true;
-          collect_count_metrics = true;
-          excluded_interfaces = [ "lo" "lo0" ];
-        }];
-      };
     };
 
     systemd.tmpfiles.rules = [

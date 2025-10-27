@@ -10,6 +10,7 @@
     logLevel = "INFO";
     enableLiveProcessCollection = true;
     enableProcessAgent = true;
+    enableNetworkMonitoring = true;
   };
 
   networking.firewall.enable = false;
