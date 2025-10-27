@@ -7,7 +7,7 @@
     flags = [
       "--no-write-lock-file"
     ];
-    dates = "minutely";
+    dates = "*:0/30";
     allowReboot = false;
   };
 
