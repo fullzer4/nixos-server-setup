@@ -7,7 +7,7 @@
     flags = [
       "--update-input"
       "nixpkgs"
-      "--commit-lock-file"
+      "--no-write-lock-file"
     ];
     dates = "daily";
     allowReboot = false;
