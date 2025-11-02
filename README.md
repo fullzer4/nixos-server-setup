@@ -7,6 +7,9 @@ NixOS server configurations using Flakes with automatic updates from GitHub.
 - Declarative server configurations
 - Auto-update from GitHub main branch (every 30 minutes)
 - Datadog monitoring integration
+- Network Performance Monitoring (NPM)
+- Process monitoring
+- K3s Kubernetes cluster (single-node)
 - Modular and reusable setup
 
 ## Hosts
@@ -118,4 +121,36 @@ sudo systemctl list-timers nixos-upgrade
 
 ```bash
 sudo journalctl -u nixos-upgrade.service -f
+```
+
+### Check Datadog Agent Status
+
+```bash
+sudo systemctl status datadog-agent
+sudo datadog-agent status
+```
+
+### View Datadog Logs
+
+```bash
+sudo journalctl -u datadog-agent -f
+```
+
+### K3s Kubernetes Commands
+
+```bash
+# Check K3s status
+sudo systemctl status k3s
+
+# View K3s logs
+sudo journalctl -u k3s -f
+
+# Access cluster with kubectl
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+kubectl get nodes
+kubectl get pods -A
+
+# Or use k3s kubectl directly
+sudo k3s kubectl get nodes
+sudo k3s kubectl get pods -A
 ```

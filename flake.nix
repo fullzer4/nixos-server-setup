@@ -15,6 +15,7 @@
           ./modules/common.nix
           ./modules/monitoring.nix
           ./modules/auto-update.nix
+          ./modules/k3s.nix
           
           ./hosts/fullzer4labs/configuration.nix
           ./hosts/fullzer4labs/hardware-configuration.nix

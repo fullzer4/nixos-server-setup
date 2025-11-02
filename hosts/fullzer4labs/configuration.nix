@@ -13,5 +13,14 @@
     enableNetworkMonitoring = true;
   };
 
+  kubernetes.k3s = {
+    enable = true;
+    clusterInit = true;
+    disableComponents = [ "traefik" ];
+    extraFlags = [
+      "--write-kubeconfig-mode=0644"
+    ];
+  };
+
   networking.firewall.enable = false;
 }
