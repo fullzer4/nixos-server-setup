@@ -1,0 +1,26 @@
+name: NixOS Configuration CI
+
+on:
+  push:
+    branches: [ main, staging ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v24
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+
+    - name: Build fullzer4labs configuration
+      run: |
+        nix build '.#nixosConfigurations.fullzer4labs.config.system.build.toplevel' \
+          --print-build-logs
