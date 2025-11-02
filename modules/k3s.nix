@@ -57,6 +57,11 @@
       ];
     };
 
+    # Allow wheel group to read kubeconfig
+    systemd.tmpfiles.rules = [
+      "z /etc/rancher/k3s/k3s.yaml 0640 root wheel -"
+    ];
+
     systemd.services.k3s = {
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
