@@ -22,7 +22,7 @@
     ];
   };
 
-  networking.wireguard = {
+  services.wireguard-server = {
     enable = true;
     serverAddress = "10.100.0.1/24";
     listenPort = 51820;
@@ -30,6 +30,7 @@
     
     peers = [
       {
+        # fullzer4's desktop
         publicKey = "Gh8Av+Iy4QyBW1O//YKUxdZLeQnyA7DP6o6LvbZtbSU=";
         allowedIPs = [ "10.100.0.2/32" ];
         persistentKeepalive = 25;

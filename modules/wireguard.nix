@@ -2,7 +2,7 @@
 
 {
   options = {
-    networking.wireguard = {
+    services.wireguard-server = {
       enable = lib.mkEnableOption "WireGuard VPN server";
 
       serverPrivateKeyFile = lib.mkOption {
@@ -54,19 +54,19 @@
     };
   };
 
-  config = lib.mkIf config.networking.wireguard.enable {
+  config = lib.mkIf config.services.wireguard-server.enable {
     boot.kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;
       "net.ipv6.conf.all.forwarding" = 1;
     };
 
-    networking.wireguard.interfaces.${config.networking.wireguard.interface} = {
-      ips = [ config.networking.wireguard.serverAddress ];
-      listenPort = config.networking.wireguard.listenPort;
+    networking.wireguard.interfaces.${config.services.wireguard-server.interface} = {
+      ips = [ config.services.wireguard-server.serverAddress ];
+      listenPort = config.services.wireguard-server.listenPort;
       
-      privateKeyFile = config.networking.wireguard.serverPrivateKeyFile;
+      privateKeyFile = config.services.wireguard-server.serverPrivateKeyFile;
       
-      peers = config.networking.wireguard.peers;
+      peers = config.services.wireguard-server.peers;
       
       postSetup = ''
         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o ens3 -j MASQUERADE
@@ -78,7 +78,7 @@
     };
 
     networking.firewall = {
-      allowedUDPPorts = [ config.networking.wireguard.listenPort ];
+      allowedUDPPorts = [ config.services.wireguard-server.listenPort ];
     };
 
     environment.systemPackages = with pkgs; [

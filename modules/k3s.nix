@@ -40,7 +40,6 @@
       );
     };
 
-    # Required packages
     environment.systemPackages = with pkgs; [
       k3s
       kubectl
@@ -57,7 +56,6 @@
       ];
     };
 
-    # Allow wheel group to read kubeconfig
     systemd.tmpfiles.rules = [
       "z /etc/rancher/k3s/k3s.yaml 0640 root wheel -"
     ];
