@@ -19,6 +19,8 @@
     disableComponents = [ "traefik" ];
     extraFlags = [
       "--write-kubeconfig-mode=0644"
+      "--tls-san=10.100.0.1"
+      "--tls-san=38.224.145.102"
     ];
   };
 
