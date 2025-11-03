@@ -9,7 +9,7 @@
     environment = "dev";
     logLevel = "INFO";
     enableLiveProcessCollection = true;
-    enableProcessAgent = true;
+    enableProcessAgent = false;
     enableNetworkMonitoring = true;
   };
 
