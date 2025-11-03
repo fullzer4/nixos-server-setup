@@ -16,6 +16,7 @@
           ./modules/monitoring.nix
           ./modules/auto-update.nix
           ./modules/k3s.nix
+          ./modules/wireguard.nix
           
           ./hosts/fullzer4labs/configuration.nix
           ./hosts/fullzer4labs/hardware-configuration.nix

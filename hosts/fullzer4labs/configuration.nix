@@ -22,5 +22,21 @@
     ];
   };
 
+  networking.wireguard = {
+    enable = true;
+    serverAddress = "10.100.0.1/24";
+    listenPort = 51820;
+    serverPrivateKeyFile = "/etc/wireguard/private.key";
+    
+    peers = [
+      {
+        publicKey = "Gh8Av+Iy4QyBW1O//YKUxdZLeQnyA7DP6o6LvbZtbSU=";
+        allowedIPs = [ "10.100.0.2/32" ];
+        persistentKeepalive = 25;
+      }
+    ];
+  };
+
   networking.firewall.enable = false;
 }
+
